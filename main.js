@@ -110,61 +110,34 @@
            }
        }
        
-// Open the modal
-function openExchangeModal() {
-    const modal = document.getElementById('exchangeModal');
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
-}
-
-// Close the modal
-function closeExchangeModal() {
-    const modal = document.getElementById('exchangeModal');
-    modal.classList.remove('active');
-    document.body.style.overflow = ''; // Restore scrolling when modal is closed
-}
-
-// Share contact via WhatsApp
-function shareViaWhatsApp() {
-    const message = `Coach Nishant's Contact Information:\nPhone: +971 50 985 9515\nEmail: nishantdhalwal25@gmail.com`;
-    window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
-}
-
-// Save contact information as a .vcf file
-function saveToContacts() {
-    const contactName = "Nishant Dhalwal";
-    const contactPhone = "+971 50 985 9515";
-    const contactEmail = "nishantdhalwal25@gmail.com";
-
-    // vCard format
-    const vCardData = `
-BEGIN:VCARD
-VERSION:3.0
-FN:${contactName}
-TEL:${contactPhone}
-EMAIL:${contactEmail}
-END:VCARD
-    `;
-
-    // Create a Blob object from the vCard data
-    const blob = new Blob([vCardData], { type: 'text/vcard' });
-
-    // Create a link element
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(blob);
-    link.download = `${contactName}.vcf`; // Set the filename
-
-    // Trigger a click event on the link to start the download
-    link.click();
-}
-
-// Share contact via Email
-function shareViaEmail() {
-    const subject = "Coach Nishant's Contact Information";
-    const body = `Here's Coach Nishant's contact information:\n\nPhone: +971 50 985 9515\nEmail: nishantdhalwal25@gmail.com\n\nI thought you might find this useful!`;
-    window.open(`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
-}
-      
+       // Exchange Contact Modal
+       function openExchangeModal() {
+           const modal = document.getElementById('exchangeModal');
+           modal.classList.add('active');
+           document.body.style.overflow = 'hidden';
+       }
+       
+       function closeExchangeModal() {
+           const modal = document.getElementById('exchangeModal');
+           modal.classList.remove('active');
+           document.body.style.overflow = '';
+       }
+       
+       // Contact Exchange Functions
+       function shareViaWhatsApp() {
+           const message = `Coach Nishant's Contact Information:\nPhone: +971 50 985 9515\nEmail: nishantdhalwal25@gmail.com`;
+           window.open(`https://wa.me/?text=${encodeURIComponent(message)}`, '_blank');
+       }
+       
+       function saveToContacts() {
+           alert("Add this contact to your phone's address book:\n\nName: Nishant Dhalwal\nPhone: +971 50 985 9515\nEmail: nishantdhalwal25@gmail.com");
+       }
+       
+       function shareViaEmail() {
+           const subject = "Coach Nishant's Contact Information";
+           const body = `Here's Coach Nishant's contact information:\n\nPhone: +971 50 985 9515\nEmail: nishantdhalwal25@gmail.com\n\nI thought you might find this useful!`;
+           window.open(`mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+       }
        
        // Initialize on load
        window.addEventListener('load', function() {
@@ -174,4 +147,120 @@ function shareViaEmail() {
            document.addEventListener('touchmove', function(e) {
                if (e.scale !== 1) e.preventDefault();
            }, { passive: false });
+       });
+       // === JavaScript with Auto-Slide ===
+       document.addEventListener('DOMContentLoaded', () => {
+           // --- Existing Elements ---
+           const sliderContainer = document.getElementById('sliderContainer');
+           const sliderTrack = document.getElementById('sliderTrack');
+           const sliderImages = document.querySelectorAll('.slider-image');
+           const fullscreenOverlay = document.getElementById('fullscreen-overlay');
+           const fullscreenImage = document.getElementById('fullscreen-image');
+           const closeButton = document.getElementById('close-fullscreen');
+
+           // --- Auto-Slide Variables ---
+           const slideIntervalTime = 3500; // Time in ms between slides (e.g., 3.5 seconds)
+           let autoSlideInterval = null; // To store the interval ID
+
+           // --- Helper: Calculate Scroll Amount ---
+           function getScrollAmount() {
+                if (sliderImages.length === 0) return 0;
+                const firstImage = sliderImages[0];
+                const style = window.getComputedStyle(sliderTrack);
+                const gap = parseFloat(style.gap) || 15; // Get gap or default
+                return firstImage.offsetWidth + gap; // Scroll by one image width + gap
+           }
+
+           // --- Auto-Slide Functions ---
+           function slideNext() {
+               if (!sliderContainer) return; // Safety check
+
+               const scrollAmount = getScrollAmount();
+               if (scrollAmount === 0) return; // No images or width yet
+
+               const currentScroll = sliderContainer.scrollLeft;
+               const maxScroll = sliderContainer.scrollWidth - sliderContainer.clientWidth;
+
+               // Check if we are near the end (within a small tolerance)
+               if (currentScroll + scrollAmount >= maxScroll - 5) {
+                   // Go back to the beginning smoothly
+                   sliderContainer.scrollTo({ left: 0 /*, behavior: 'smooth' - CSS handles this now */ });
+               } else {
+                   // Scroll right by the calculated amount
+                   sliderContainer.scrollBy({ left: scrollAmount /*, behavior: 'smooth' - CSS handles this now */ });
+               }
+           }
+
+           function startAutoSlide() {
+               // Don't start if already running or if fullscreen is open
+               if (autoSlideInterval || fullscreenOverlay.classList.contains('visible')) {
+                   return;
+               }
+                // Clear any lingering interval just in case
+               clearInterval(autoSlideInterval);
+               autoSlideInterval = setInterval(slideNext, slideIntervalTime);
+               // console.log("Auto-slide started");
+           }
+
+           function stopAutoSlide() {
+               clearInterval(autoSlideInterval);
+               autoSlideInterval = null; // Reset interval ID
+               // console.log("Auto-slide stopped");
+           }
+
+           // --- Fullscreen Functions (Modified for Auto-Slide) ---
+           function openFullscreen(event) {
+               stopAutoSlide(); // Stop sliding when opening fullscreen
+               const imgSrc = event.target.src;
+               fullscreenImage.src = imgSrc;
+               fullscreenOverlay.classList.add('visible');
+               document.body.classList.add('overlay-open');
+           }
+
+           function closeFullscreen() {
+               fullscreenOverlay.classList.remove('visible');
+               document.body.classList.remove('overlay-open');
+               // Check if mouse is *not* over the slider before restarting
+               // A small delay helps ensure hover state is correct after closing
+                setTimeout(() => {
+                    if (!sliderContainer.matches(':hover')) {
+                        startAutoSlide();
+                    }
+                }, 100); // Short delay
+               // Clear image src after transition (optional)
+                setTimeout(() => {
+                    if (!fullscreenOverlay.classList.contains('visible')) {
+                        fullscreenImage.src = '';
+                    }
+                }, 300); // Match CSS transition duration
+           }
+
+           // --- Event Listeners ---
+
+           // Image click listener (Unchanged)
+           sliderImages.forEach(img => {
+               img.addEventListener('click', openFullscreen);
+           });
+
+           // Fullscreen Close Listeners (Unchanged)
+           closeButton.addEventListener('click', closeFullscreen);
+           fullscreenOverlay.addEventListener('click', (event) => {
+               if (event.target === fullscreenOverlay) {
+                   closeFullscreen();
+               }
+           });
+           document.addEventListener('keydown', (event) => {
+               if (event.key === 'Escape' && fullscreenOverlay.classList.contains('visible')) {
+                   closeFullscreen();
+               }
+           });
+
+           // --- Auto-Slide Pause/Resume Listeners ---
+           sliderContainer.addEventListener('mouseenter', stopAutoSlide);
+           sliderContainer.addEventListener('mouseleave', startAutoSlide);
+
+           // --- Initial Auto-Slide Start ---
+            // Add a small delay to allow images to potentially load dimensions
+           setTimeout(startAutoSlide, 500);
+
        });
