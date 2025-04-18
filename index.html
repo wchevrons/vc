@@ -6,7 +6,10 @@
     <title>Coach Nishant - Elite Fitness Trainer</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-   <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="bg"></div>
@@ -44,23 +47,60 @@
             </div>
             <div class="dropdown-content">
                 <!-- About Coach Nishant Section -->
-<section id="about-coach">
-    <div class="video-wrapper">
-      <iframe id="aboutVideo" src="https://player.vimeo.com/video/1076314603?h=c169df89d0&autopause=0&controls=0&muted=0" 
-        width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-      <div class="controls">
-        <button class="control-btn" onclick="togglePlay('aboutVideo')"><i class="fas fa-play"></i></button>
-      </div>
-    </div>
-  </section>
-  
-  
+                <section id="about-coach">
+                    <div class="video-wrapper">
+                        <iframe id="aboutVideo" src="https://player.vimeo.com/video/1076314603?h=c169df89d0&autopause=0&controls=0&muted=0" 
+                            width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                        <div class="controls">
+                            <button class="control-btn" onclick="togglePlay('aboutVideo')"><i class="fas fa-play"></i></button>
+                        </div>
+                    </div>
+                </section>
+                
                 <div style="padding: 15px; text-align: center; color: #2a7aaf; font-size: 0.9rem; line-height: 1.5;">
                     "As a fitness coach, my mission is to help people transform their lives through simple, sustainable habits. I've worked with clients of all ages, including high-profile individuals with medical conditions or physical limitations, guiding them toward healthier lifestyles without disrupting their daily routines. I believe health shouldn't be seasonal—it should be a consistent part of life. For me, longevity is the key to truly living well."
                 </div>
             </div>
         </div>
         
+        <!-- Achievements section -->
+        <div class="dropdown-section">
+            <div class="dropdown-header" onclick="toggleDropdown(this)">
+                <h3>AHIEVEMENTS</h3>
+                <div class="dropdown-icon">
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+            <div class="dropdown-content">
+                <div class="slider-container" id="sliderContainer">
+                    <div class="slider-track" id="sliderTrack">
+                        <img src="/img/11.png" alt="Image 1" class="slider-image">
+                        <img src="/img/12.png" alt="Image 2" class="slider-image">
+                        <img src="/img/13.png" alt="Image 3" class="slider-image">
+                        <img src="/img/14.png" alt="Image 4" class="slider-image">
+                        <img src="/img/15.png" alt="Image 5" class="slider-image">
+                        <img src="/img/16.png" alt="Image 6" class="slider-image">
+                        <img src="/img/17.png" alt="Image 7" class="slider-image">
+                        <img src="/img/2.png" alt="Image 8" class="slider-image">
+                        <img src="/img/1.png" alt="Image 9" class="slider-image">
+                        <img src="/img/3.png" alt="Image 10" class="slider-image">
+                        <img src="/img/4.png" alt="Image 11" class="slider-image">
+                        <img src="/img/5.png" alt="Image 12" class="slider-image">
+                        <img src="/img/6.png" alt="Image 13" class="slider-image">
+                        <img src="/img/7.png" alt="Image 14" class="slider-image">
+                        <img src="/img/8.png" alt="Image 15" class="slider-image">
+                        <img src="/img/9.png" alt="Image 16" class="slider-image">
+                        <img src="/img/10.png" alt="Image 17" class="slider-image">
+                    </div>
+                </div>
+
+                <div id="fullscreen-overlay">
+                    <span id="close-fullscreen">&times;</span>
+                    <img id="fullscreen-image" src="" alt="Fullscreen Image View">
+                </div>
+            </div>
+        </div>
+
         <!-- Client Transformations Dropdown -->
         <div class="dropdown-section">
             <div class="dropdown-header" onclick="toggleDropdown(this)">
@@ -70,97 +110,18 @@
                 </div>
             </div>
             <div class="dropdown-content">
-                <div class="testimonial-slider">
-                    <div class="swiper">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="testimonial-slide">
-                                    <div class="client-info">
-                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="client-image">
-                                        <div>
-                                            <div class="client-name">Ahmed Khalid</div>
-                                            <div class="client-title">Lost 18kg in 12 weeks</div>
-                                        </div>
-                                    </div>
-                                    <div class="testimonial-text">
-                                        "Coach Nishant's personalized program gave me incredible results. His nutrition guidance was game-changing! I went from 98kg to 80kg while gaining muscle definition I never thought possible."
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="testimonial-slide">
-                                    <div class="client-info">
-                                        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="client-image">
-                                        <div>
-                                            <div class="client-name">Sarah Mohammed</div>
-                                            <div class="client-title">Rehabbed knee injury</div>
-                                        </div>
-                                    </div>
-                                    <div class="testimonial-text">
-                                        "After ACL surgery, Coach Nishant's rehab program got me back to competitive running in record time. His knowledge of sports medicine is exceptional and he tailored every session to my recovery needs."
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="testimonial-slide">
-                                    <div class="client-info">
-                                        <img src="https://randomuser.me/api/portraits/men/22.jpg" class="client-image">
-                                        <div>
-                                            <div class="client-name">Omar Hassan</div>
-                                            <div class="client-title">Gained 8kg muscle in 16 weeks</div>
-                                        </div>
-                                    </div>
-                                    <div class="testimonial-text">
-                                        "As a hardgainer, I struggled to put on mass for years. Coach Nishant's specialized hypertrophy program and meal plan helped me achieve what I couldn't in 5 years of trying on my own."
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="testimonial-slide">
-                                    <div class="client-info">
-                                        <img src="https://randomuser.me/api/portraits/women/63.jpg" class="client-image">
-                                        <div>
-                                            <div class="client-name">Fatima Al-Mansoori</div>
-                                            <div class="client-title">Post-pregnancy transformation</div>
-                                        </div>
-                                    </div>
-                                    <div class="testimonial-text">
-                                        "After two pregnancies, I thought I'd never get my pre-baby body back. Coach Nishant's post-natal program restored my core strength and helped me lose 15kg safely while breastfeeding."
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="testimonial-slide">
-                                    <div class="client-info">
-                                        <img src="https://randomuser.me/api/portraits/men/45.jpg" class="client-image">
-                                        <div>
-                                            <div class="client-name">Youssef Abdullah</div>
-                                            <div class="client-title">Diabetes management</div>
-                                        </div>
-                                    </div>
-                                    <div class="testimonial-text">
-                                        "With type 2 diabetes, I needed specialized guidance. Coach Nishant created a program that helped me reduce my HbA1c from 8.2 to 5.9 in 6 months while improving my strength and mobility."
-                                    </div>
-                                </div>
-                            </div>
+                <section id="client-transformations">
+                    <div class="video-wrapper">
+                        <iframe id="transformVideo" src="https://player.vimeo.com/video/1076267504?h=56b1dbc32a&autopause=0&controls=0&muted=0"
+                            width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+                        <div class="controls">
+                            <button class="control-btn" onclick="togglePlay('transformVideo')"><i class="fas fa-play"></i></button>
                         </div>
-                        <div class="swiper-pagination"></div>
                     </div>
-                </div>
-                <!-- Client Transformations Section -->
-<section id="client-transformations">
-    <div class="video-wrapper">
-      <iframe id="transformVideo" src="https://player.vimeo.com/video/1076267504?h=56b1dbc32a&autopause=0&controls=0&muted=0"
-        width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
-      <div class="controls">
-        <button class="control-btn" onclick="togglePlay('transformVideo')"><i class="fas fa-play"></i></button>
-      </div>
-    </div>
-  </section>
-  
+                </section>
             </div>
         </div>
-        
+       
         <!-- Specialties Dropdown -->
         <div class="dropdown-section">
             <div class="dropdown-header" onclick="toggleDropdown(this)">
@@ -204,26 +165,26 @@
     
     <!-- Exchange Contact Modal -->
     <div class="exchange-modal" id="exchangeModal">
-        <button class="close-modal" aria-label="Close" onclick="closeExchangeModal()">
-          <i class="fas fa-times"></i>
-        </button>
-        <div class="exchange-content">
-          <h3>Exchange Contact Information</h3>
-          <div class="exchange-option" onclick="shareViaWhatsApp()">
-            <i class="fab fa-whatsapp"></i>
-            <span>Share via WhatsApp</span>
-          </div>
-          <div class="exchange-option" onclick="saveToContacts()">
-            <i class="fas fa-address-book"></i>
-            <span>Save to Contacts</span>
-          </div>
-          <div class="exchange-option" onclick="shareViaEmail()">
-            <i class="fas fa-envelope"></i>
-            <span>Share via Email</span>
-          </div>
+        <div class="close-modal" onclick="closeExchangeModal()">
+            <i class="fas fa-times"></i>
         </div>
-      </div>
-      
+        <div class="exchange-content">
+            <h3>Exchange Contact Information</h3>
+            <div class="exchange-option" onclick="shareViaWhatsApp()">
+                <i class="fab fa-whatsapp"></i>
+                <span>Share via WhatsApp</span>
+            </div>
+            <div class="exchange-option" onclick="saveToContacts()">
+                <i class="fas fa-address-book"></i>
+                <span>Save to Contacts</span>
+            </div>
+            <div class="exchange-option" onclick="shareViaEmail()">
+                <i class="fas fa-envelope"></i>
+                <span>Share via Email</span>
+            </div>
+        </div>
+    </div>
+    
     <script src="https://player.vimeo.com/api/player.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="main.js"></script>
