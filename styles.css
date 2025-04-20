@@ -400,56 +400,6 @@ transform:translateX(25%);
         columns: 1;
     }
 }
-.video-wrapper {
-    position: relative;
-    width: 640px;
-    max-width: 100%;
-    margin: 20px auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50px;
-   
-}
-.video-wrapper video {
-    max-width: 100%;
-    display: block;
-    border-radius: 12px;
-    overflow: hidden;
-
-}
-
-
-.controls {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
-}
-
-.control-btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: rgba(0,0,0,0.7);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.control-btn:hover {
-    background: rgba(0,0,0,0.9);
-}
-
-.control-btn i {
-    font-size: 16px;
-}
 /* === CSS Styles (Mostly Unchanged) === */
 :root {
     --primary-color: #007bff;
@@ -569,4 +519,208 @@ h1 {
     .slider-image { height: 120px; }
     .slider-track { gap: 10px; } /* Slightly reduce gap */
     h1 { font-size: 1.5em; }
+}
+
+/* ========== About Coach Section ========== */
+#about-coach .video-wrapper {
+    position: relative;
+    width: 640px;
+    max-width: 100%;
+    margin: 20px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+}
+
+#about-coach .video-wrapper iframe {
+    max-width: 100%;
+    display: block;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#about-coach .controls {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+#about-coach .control-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#about-coach .control-btn:hover {
+    background: rgba(0,0,0,0.9);
+}
+
+#about-coach .control-btn i {
+    font-size: 16px;
+}
+
+/* ========== Client Transformations Section ========== */
+.dropdown-content #client-transformations .video-slider {
+    position: relative;
+    width: 640px;
+    max-width: 100%;
+    margin: 20px auto;
+    overflow: hidden;
+}
+
+.dropdown-content #client-transformations .video-wrapper {
+    position: relative;
+    width: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+}
+
+.dropdown-content #client-transformations .video-wrapper.active {
+    display: flex;
+}
+
+.dropdown-content #client-transformations .video-wrapper iframe {
+    max-width: 100%;
+    display: block;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+.dropdown-content #client-transformations .controls {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.dropdown-content #client-transformations .control-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dropdown-content #client-transformations .nav-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dropdown-content #client-transformations .control-btn:hover,
+.dropdown-content #client-transformations .nav-btn:hover {
+    background: rgba(0,0,0,0.9);
+}
+
+.dropdown-content #client-transformations .control-btn i,
+.dropdown-content #client-transformations .nav-btn i {
+    font-size: 16px;
+}
+
+/* Client Transformations Section Specific Styles */
+.dropdown-content #client-transformations .video-slider {
+    position: relative;
+    width: 640px;
+    max-width: 100%;
+    margin: 20px auto;
+    overflow: hidden;
+}
+
+.dropdown-content #client-transformations .video-wrapper {
+    position: relative;
+    width: 100%;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50px;
+}
+
+.dropdown-content #client-transformations .video-wrapper.active {
+    display: flex;
+}
+
+.dropdown-content #client-transformations .video-wrapper iframe {
+    max-width: 100%;
+    display: block;
+    border-radius: 100%; /* Changed from 12px to match inline style */
+    overflow: hidden;
+}
+
+.dropdown-content #client-transformations .controls {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.dropdown-content #client-transformations .control-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dropdown-content #client-transformations .nav-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dropdown-content #client-transformations .control-btn:hover,
+.dropdown-content #client-transformations .nav-btn:hover {
+    background: rgba(0,0,0,0.9);
+}
+
+.dropdown-content #client-transformations .control-btn i,
+.dropdown-content #client-transformations .nav-btn i {
+    font-size: 16px;
 }
