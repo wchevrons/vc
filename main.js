@@ -1,54 +1,150 @@
- // Initialize players
- let aboutPlayer, transformPlayer;
+// Initialize all players
+let aboutPlayer, transformPlayer1, transformPlayer2;
+let currentVideoIndex = 0;
+const videoWrappers = document.querySelectorAll('#client-transformations .video-wrapper');
 
- // Wait for the Vimeo API to be ready
- function initPlayers() {
-   aboutPlayer = new Vimeo.Player('aboutVideo');
-   transformPlayer = new Vimeo.Player('transformVideo');
-   
-   // Handle video end events
-   aboutPlayer.on('ended', function() {
-     document.querySelector('#about-coach .control-btn').innerHTML = '<i class="fas fa-play"></i>';
-   });
-   
-   transformPlayer.on('ended', function() {
-     document.querySelector('#client-transformations .control-btn').innerHTML = '<i class="fas fa-play"></i>';
-   });
- }
+// Wait for the Vimeo API to be ready
+function initAllPlayers() {
+  try {
+    // Initialize aboutVideo player
+    aboutPlayer = new Vimeo.Player('aboutVideo');
+    aboutPlayer.on('ended', function() {
+      document.querySelector('#about-coach .control-btn').innerHTML = '<i class="fas fa-play"></i>';
+    });
 
- // Toggle play/pause function
- function togglePlay(videoId) {
-   let player, btn;
-   if (videoId === 'aboutVideo') {
-     player = aboutPlayer;
-     btn = document.querySelector('#about-coach .control-btn');
-   } else if (videoId === 'transformVideo') {
-     player = transformPlayer;
-     btn = document.querySelector('#client-transformations .control-btn');
-   }
-   
-   player.getPaused().then(function(paused) {
-     if (paused) {
-       player.play().then(function() {
-         btn.innerHTML = '<i class="fas fa-pause"></i>';
-       }).catch(function(error) {
-         console.error('Play error:', error);
-         // Fallback: Try unmuting first (browser autoplay policies)
-         player.setVolume(1).then(function() {
-           player.play();
-         });
-       });
-     } else {
-       player.pause();
-       btn.innerHTML = '<i class="fas fa-play"></i>';
-     }
-   });
- }
+    // Initialize transformation video players
+    transformPlayer1 = new Vimeo.Player('transformVideo1');
+    transformPlayer2 = new Vimeo.Player('transformVideo2');
+    
+    // Handle video end events for transformation videos
+    transformPlayer1.on('ended', function() {
+      document.querySelector('#transformVideo1 + .controls .control-btn').innerHTML = '<i class="fas fa-play"></i>';
+    });
+    
+    transformPlayer2.on('ended', function() {
+      document.querySelector('#transformVideo2 + .controls .control-btn').innerHTML = '<i class="fas fa-play"></i>';
+    });
 
- // Initialize when the page loads
- document.addEventListener('DOMContentLoaded', function() {
-   initPlayers();
- });
+    // Set initial volume to muted for transformation videos (helps with autoplay restrictions)
+    transformPlayer1.setVolume(0);
+    transformPlayer2.setVolume(0);
+    
+    console.log('All Vimeo players initialized successfully');
+    
+    // Show first transformation video
+    if (videoWrappers.length > 0) {
+      showVideo(0);
+    }
+  } catch (error) {
+    console.error('Error initializing Vimeo players:', error);
+  }
+}
+
+// Toggle play/pause for aboutVideo
+function toggleAboutPlay() {
+  const btn = document.querySelector('#about-coach .control-btn');
+  
+  if (!aboutPlayer) {
+    console.error('About player not initialized');
+    return;
+  }
+
+  aboutPlayer.getPaused().then(function(paused) {
+    if (paused) {
+      aboutPlayer.play().then(function() {
+        btn.innerHTML = '<i class="fas fa-pause"></i>';
+      }).catch(function(error) {
+        console.error('Play error:', error);
+        // Fallback: Try with sound if muted autoplay was blocked
+        aboutPlayer.setVolume(1).then(function() {
+          aboutPlayer.play().then(function() {
+            btn.innerHTML = '<i class="fas fa-pause"></i>';
+          });
+        });
+      });
+    } else {
+      aboutPlayer.pause();
+      btn.innerHTML = '<i class="fas fa-play"></i>';
+    }
+  }).catch(function(error) {
+    console.error('Error checking pause state:', error);
+  });
+}
+
+// Toggle play/pause for transformation videos
+function toggleTransformPlay(videoId) {
+  let player, btn;
+  
+  if (videoId === 'transformVideo1') {
+    player = transformPlayer1;
+    btn = document.querySelector('#transformVideo1 + .controls .control-btn');
+  } else if (videoId === 'transformVideo2') {
+    player = transformPlayer2;
+    btn = document.querySelector('#transformVideo2 + .controls .control-btn');
+  }
+
+  if (!player) {
+    console.error('Player not initialized for:', videoId);
+    return;
+  }
+
+  player.getPaused().then(function(paused) {
+    if (paused) {
+      // Start with muted audio to bypass autoplay restrictions
+      player.setVolume(0).then(() => {
+        return player.play();
+      }).then(() => {
+        btn.innerHTML = '<i class="fas fa-pause"></i>';
+        // Gradually increase volume after playback starts
+        player.setVolume(1);
+      }).catch(error => {
+        console.error('Playback failed:', error);
+        btn.innerHTML = '<i class="fas fa-play"></i>';
+      });
+    } else {
+      player.pause();
+      btn.innerHTML = '<i class="fas fa-play"></i>';
+    }
+  }).catch(error => {
+    console.error('Error checking pause state:', error);
+  });
+}
+
+// Navigation functions for transformation videos
+function showVideo(index) {
+  // Pause current video before switching
+  if (currentVideoIndex === 0 && transformPlayer1) {
+    transformPlayer1.pause();
+    document.querySelector('#transformVideo1 + .controls .control-btn').innerHTML = '<i class="fas fa-play"></i>';
+  } else if (transformPlayer2) {
+    transformPlayer2.pause();
+    document.querySelector('#transformVideo2 + .controls .control-btn').innerHTML = '<i class="fas fa-play"></i>';
+  }
+  
+  videoWrappers.forEach(wrapper => wrapper.classList.remove('active'));
+  videoWrappers[index].classList.add('active');
+  currentVideoIndex = index;
+}
+
+function nextVideo() {
+  const nextIndex = (currentVideoIndex + 1) % videoWrappers.length;
+  showVideo(nextIndex);
+}
+
+function prevVideo() {
+  const prevIndex = (currentVideoIndex - 1 + videoWrappers.length) % videoWrappers.length;
+  showVideo(prevIndex);
+}
+
+// Initialize when the page loads
+document.addEventListener('DOMContentLoaded', function() {
+  // Add slight delay to ensure Vimeo API is loaded
+  setTimeout(initAllPlayers, 300);
+});
+
+
+
+
 
        // Create water bubble background
        function createBubbles() {
