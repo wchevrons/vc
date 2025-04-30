@@ -1,5 +1,5 @@
 // Initialize all players
-let aboutPlayer, transformPlayer1, transformPlayer2;
+let aboutPlayer, transformPlayer1, transformPlayer2, transformPlayer3, transformPlayer4;
 let currentVideoIndex = 0;
 const videoWrappers = document.querySelectorAll('#client-transformations .video-wrapper');
 
@@ -15,6 +15,8 @@ function initAllPlayers() {
     // Initialize transformation video players
     transformPlayer1 = new Vimeo.Player('transformVideo1');
     transformPlayer2 = new Vimeo.Player('transformVideo2');
+    transformPlayer3 = new Vimeo.Player('transformVideo3');
+    transformPlayer4 = new Vimeo.Player('transformVideo4');
     
     // Handle video end events for transformation videos
     transformPlayer1.on('ended', function() {
@@ -24,10 +26,20 @@ function initAllPlayers() {
     transformPlayer2.on('ended', function() {
       document.querySelector('#transformVideo2 + .controls .control-btn').innerHTML = '<i class="fas fa-play"></i>';
     });
+    
+    transformPlayer3.on('ended', function() {
+      document.querySelector('#transformVideo3 + .controls .control-btn').innerHTML = '<i class="fas fa-play"></i>';
+    });
+    
+    transformPlayer4.on('ended', function() {
+      document.querySelector('#transformVideo4 + .controls .control-btn').innerHTML = '<i class="fas fa-play"></i>';
+    });
 
     // Set initial volume to muted for transformation videos (helps with autoplay restrictions)
     transformPlayer1.setVolume(0);
     transformPlayer2.setVolume(0);
+    transformPlayer3.setVolume(0);
+    transformPlayer4.setVolume(0);
     
     console.log('All Vimeo players initialized successfully');
     
@@ -81,6 +93,12 @@ function toggleTransformPlay(videoId) {
   } else if (videoId === 'transformVideo2') {
     player = transformPlayer2;
     btn = document.querySelector('#transformVideo2 + .controls .control-btn');
+  } else if (videoId === 'transformVideo3') {
+    player = transformPlayer3;
+    btn = document.querySelector('#transformVideo3 + .controls .control-btn');
+  } else if (videoId === 'transformVideo4') {
+    player = transformPlayer4;
+    btn = document.querySelector('#transformVideo4 + .controls .control-btn');
   }
 
   if (!player) {
@@ -116,9 +134,15 @@ function showVideo(index) {
   if (currentVideoIndex === 0 && transformPlayer1) {
     transformPlayer1.pause();
     document.querySelector('#transformVideo1 + .controls .control-btn').innerHTML = '<i class="fas fa-play"></i>';
-  } else if (transformPlayer2) {
+  } else if (currentVideoIndex === 1 && transformPlayer2) {
     transformPlayer2.pause();
     document.querySelector('#transformVideo2 + .controls .control-btn').innerHTML = '<i class="fas fa-play"></i>';
+  } else if (currentVideoIndex === 2 && transformPlayer3) {
+    transformPlayer3.pause();
+    document.querySelector('#transformVideo3 + .controls .control-btn').innerHTML = '<i class="fas fa-play"></i>';
+  } else if (currentVideoIndex === 3 && transformPlayer4) {
+    transformPlayer4.pause();
+    document.querySelector('#transformVideo4 + .controls .control-btn').innerHTML = '<i class="fas fa-play"></i>';
   }
   
   videoWrappers.forEach(wrapper => wrapper.classList.remove('active'));
@@ -141,8 +165,6 @@ document.addEventListener('DOMContentLoaded', function() {
   // Add slight delay to ensure Vimeo API is loaded
   setTimeout(initAllPlayers, 300);
 });
-
-
 
 
 
