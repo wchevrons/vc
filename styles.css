@@ -1,8 +1,8 @@
 :root {
-    --primary: #77c3ec;
-    --primary-light: #9dd9f3;
-    --primary-dark: #5aafdf;
-    --accent: #ff7e5f;
+    --primary: #84cc16;
+    --primary-light: #84cc16;
+    --primary-dark: #84cc16;
+    --accent: #84cc16;
     --text-dark: #2c3e50;
     --text-light: #f8f9fa;
     --card-bg: rgba(255, 255, 255, 0.95);
@@ -76,7 +76,7 @@ transform:translateX(25%);
     background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     position: relative;
     overflow: hidden;
-    background: url('/img/Black\ and\ Orange\ Brush\ Gym\ Facebook\ Cover.jpg') center/cover no-repeat;
+    background: url('/img/bg1.png') center/cover no-repeat;
     height: 300px;
     width: 390px;
 }
@@ -187,7 +187,7 @@ transform:translateX(25%);
 }
 
 .exchange-btn {
-    background: #2ecc71;
+    background: #84cc16;
 }
 
 .action-btn:active {
@@ -302,7 +302,7 @@ transform:translateX(25%);
     background: var(--primary-light);
     color: white;
     font-size: 0.75rem;
-    background-color: #77c3ec;
+    background-color: #84cc16;
 }
 
 /* Exchange Contact Modal */
